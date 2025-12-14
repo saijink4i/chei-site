@@ -29,9 +29,9 @@ export default function Hero({ lng }: { lng: string }) {
                 <div className="absolute inset-0 z-10 pointer-events-none opacity-90">
                     <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="w-full h-full">
                         {/* Cursive Heart Path - Asymmetrical and 'spilled' style */}
-                        {/* Layer 1: Main rough outline */}
+                        {/* Layer 1: Main rough outline - Widened */}
                         <motion.path
-                            d="M 50 198 C -20 120 -10 40 40 20 C 55 10 55 40 50 50 C 45 40 60 10 80 20 C 120 50 110 130 50 198"
+                            d="M 50 198 C -30 110 -20 30 40 20 C 55 10 55 40 50 50 C 45 40 60 10 80 20 C 130 30 130 130 50 198"
                             fill="none"
                             stroke="white"
                             strokeWidth="1.2"
@@ -42,9 +42,9 @@ export default function Hero({ lng }: { lng: string }) {
                             animate={{ pathLength: 1, opacity: 0.9 }}
                             transition={{ duration: 3, ease: "easeInOut" }}
                         />
-                        {/* Layer 2: Secondary sketch line (slightly offset) */}
+                        {/* Layer 2: Secondary sketch line - Widened */}
                         <motion.path
-                            d="M 52 195 C -15 130 -5 45 42 22 C 58 12 52 45 50 55 C 48 45 65 12 85 22 C 115 55 105 135 52 195"
+                            d="M 52 195 C -25 120 -15 35 42 22 C 58 12 52 45 50 55 C 48 45 65 12 85 22 C 125 45 125 135 52 195"
                             fill="none"
                             stroke="white"
                             strokeWidth="0.8"
@@ -54,9 +54,9 @@ export default function Hero({ lng }: { lng: string }) {
                             animate={{ pathLength: 1, opacity: 0.7 }}
                             transition={{ duration: 3.2, delay: 0.2, ease: "easeInOut" }}
                         />
-                        {/* Layer 3: Extra scribbles for hand-drawn feel */}
+                        {/* Layer 3: Extra scribbles - Widened */}
                         <motion.path
-                            d="M 48 190 C -10 125 0 50 38 25 M 62 25 C 90 40 100 120 48 190"
+                            d="M 48 190 C -20 115 5 40 38 25 M 62 25 C 100 40 120 120 48 190"
                             fill="none"
                             stroke="white"
                             strokeWidth="0.5"
