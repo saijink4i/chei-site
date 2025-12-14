@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
     label: t('groom'),
     desc: t('groom_desc'),
     tel: t('groom_tel'),
-    line: 'https://line.me/ti/p/lomuhoe',
+    line: 'https://line.me/ti/p/rTRadGp-fc',
     photo: '/images/groom.png'
   }
 
@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
     label: t('bride'),
     desc: t('bride_desc'),
     tel: t('bride_tel'),
-    line: 'https://line.me/ti/p/reiko0404basslove',
+    line: 'https://line.me/ti/p/mFoRCVN0gE',
     photo: '/images/bride.png'
   }
 

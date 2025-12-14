@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from '../app/i18n/client'
+import Image from 'next/image'
 
 export default function Calendar({ lng }: { lng: string }) {
     const { t } = useTranslation(lng)
@@ -36,54 +37,62 @@ export default function Calendar({ lng }: { lng: string }) {
     }, [])
 
     return (
-        <section className="py-24 px-6 bg-white flex flex-col items-center">
-            <div className="space-y-4 text-center mb-12">
-                <h2 className="text-3xl font-serif text-stone-800">
-                    2026.11.28
+        <section className="py-24 px-6 bg-[#fbfaf9] flex flex-col items-center">
+            {/* Header */}
+            <div className="space-y-6 text-center mb-12">
+                <h2 className="text-4xl font-serif text-stone-800 tracking-wide">
+                    {t('calendar_title')}
                 </h2>
-                <p className="text-stone-500 uppercase tracking-widest text-sm">
-                    Saturday
-                </p>
+                <div className="space-y-2">
+                    <p className="text-stone-600 font-medium">
+                        {t('calendar_date_full')}
+                    </p>
+                    <p className="text-stone-400 font-light text-sm">
+                        {t('calendar_date_en')}
+                    </p>
+                </div>
             </div>
 
+            {/* Divider */}
+            <div className="w-full max-w-md h-[1px] bg-stone-200 mb-12"></div>
+
             {/* Calendar UI */}
-            <div className="w-full max-w-[300px] mb-16">
-                <div className="text-center font-serif text-xl mb-6">November</div>
-                <div className="grid grid-cols-7 gap-y-4 text-center text-sm font-light text-stone-600">
-                    <div className="text-red-400">Sun</div>
+            <div className="w-full max-w-[320px] mb-16">
+                <div className="grid grid-cols-7 gap-y-6 text-center text-sm text-stone-600">
+                    <div className="text-[#FF8D8D] font-medium">Sun</div>
                     <div>Mon</div>
                     <div>Tue</div>
                     <div>Wed</div>
                     <div>Thu</div>
                     <div>Fri</div>
-                    <div className="text-blue-400">Sat</div>
+                    <div className="text-[#6B9AC4] font-medium">Sat</div>
 
-                    {/* Empty days for Nov 2026 (Starts Sunday) */}
-                    <div className="text-stone-300">1</div>
+                    {/* Nov 2026 - Starts Sunday */}
+                    <div className="text-[#FF8D8D]">1</div>
                     <div>2</div>
                     <div>3</div>
                     <div>4</div>
                     <div>5</div>
                     <div>6</div>
-                    <div className="text-blue-400">7</div>
+                    <div className="text-[#6B9AC4]">7</div>
 
-                    <div className="text-red-400">8</div>
+                    <div className="text-[#FF8D8D]">8</div>
                     <div>9</div>
                     <div>10</div>
                     <div>11</div>
                     <div>12</div>
                     <div>13</div>
-                    <div className="text-blue-400">14</div>
+                    <div className="text-[#6B9AC4]">14</div>
 
-                    <div className="text-red-400">15</div>
+                    <div className="text-[#FF8D8D]">15</div>
                     <div>16</div>
                     <div>17</div>
                     <div>18</div>
                     <div>19</div>
                     <div>20</div>
-                    <div className="text-blue-400">21</div>
+                    <div className="text-[#6B9AC4]">21</div>
 
-                    <div className="text-red-400">22</div>
+                    <div className="text-[#FF8D8D]">22</div>
                     <div>23</div>
                     <div>24</div>
                     <div>25</div>
@@ -94,33 +103,50 @@ export default function Calendar({ lng }: { lng: string }) {
                         <motion.div
                             initial={{ scale: 0 }}
                             whileInView={{ scale: 1 }}
-                            className="absolute inset-0 bg-[#A67B5B] rounded-full -z-0"
+                            className="absolute bg-[#759CC9] w-8 h-8 rounded-full -z-0"
                         />
                     </div>
 
-                    <div className="text-red-400">29</div>
+                    <div className="text-[#FF8D8D]">29</div>
                     <div>30</div>
                 </div>
             </div>
 
+            {/* Divider */}
+            <div className="w-full max-w-md h-[1px] bg-stone-200 mb-12"></div>
+
             {/* Countdown */}
-            <div className="grid grid-cols-4 gap-4 md:gap-8 text-center w-full max-w-md">
-                <CountdownItem label="DD" value={timeLeft.days} />
-                <CountdownItem label="HH" value={timeLeft.hours} />
-                <CountdownItem label="MM" value={timeLeft.minutes} />
-                <CountdownItem label="SS" value={timeLeft.seconds} />
+            <div className="w-full max-w-lg space-y-12">
+                <div className="grid grid-cols-4 gap-3 md:gap-6">
+                    <CountdownItem label={t('days')} value={timeLeft.days} />
+                    <CountdownItem label={t('hours')} value={timeLeft.hours} />
+                    <CountdownItem label={t('minutes')} value={timeLeft.minutes} />
+                    <CountdownItem label={t('seconds')} value={timeLeft.seconds} />
+                </div>
+
+                <p className="text-center text-stone-600 font-medium">
+                    {t('countdown_footer', {
+                        groom: t('groom_name'),
+                        bride: t('bride_name'),
+                        days: timeLeft.days
+                    })}
+                </p>
             </div>
         </section>
     )
 }
 
+
 function CountdownItem({ label, value }: { label: string, value: number }) {
     return (
-        <div className="space-y-2">
-            <div className="text-3xl md:text-4xl font-serif text-stone-800 tabular-nums">
-                {String(value).padStart(2, '0')}
+        <div className="bg-white rounded-lg shadow-sm p-3 md:p-4 flex flex-col items-center justify-center aspect-square border border-stone-50">
+            <div
+                className="text-2xl md:text-3xl font-serif text-stone-800 tabular-nums mb-1"
+                suppressHydrationWarning
+            >
+                {String(value)}
             </div>
-            <div className="text-[10px] uppercase tracking-widest text-stone-400">
+            <div className="text-[10px] md:text-xs uppercase tracking-wider text-stone-400">
                 {label}
             </div>
         </div>

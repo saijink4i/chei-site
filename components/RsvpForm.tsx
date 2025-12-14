@@ -122,7 +122,7 @@ export default function RsvpForm({ lng }: { lng: string }) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     onSubmit={handleSubmit(onSubmit)}
-                    className="space-y-8 bg-white p-8 rounded-2xl shadow-sm border border-stone-100"
+                    className="space-y-8 bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-stone-100"
                 >
                     {/* Name */}
                     <div className="space-y-2">
@@ -186,7 +186,7 @@ export default function RsvpForm({ lng }: { lng: string }) {
                                 </div>
                             ) : (
                                 <div className="space-y-1">
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <select
                                             {...register('countryCode')}
                                             className="px-3 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none cursor-pointer text-stone-600 text-sm font-medium"

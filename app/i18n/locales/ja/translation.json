@@ -1,7 +1,9 @@
 {
     "title": "勝尾怜子と崔仁会の\n結婚式",
     "welcome": "ようこそ",
-    "date": "2026年 11월 28일",
+    "date": "2026年 11月 28日 13:40",
+    "time_location": "DMCタワーウェディング",
+    "invitation_poem": "お互いを見つめ合い育んできた愛を\nこれからは同じ場所を見つめながら\n歩んでいこうと思います。\n\n私たち二人の新たな始まりを\n祝福していただければ、この上ない喜びとして大切にいたします。",
     "groom": "新郎",
     "bride": "新婦",
     "groom_name": "崔仁会",
@@ -67,5 +69,19 @@
     "rsvp_error_phone": "正しい電話番号を入力してください",
     "rsvp_guide": "皆様を万全にお迎えできるよう、\n出欠のご連絡をお願いいたします。",
     "groom_tel": "+81 070-5548-4260",
-    "bride_tel": "+81 090-1456-3792"
+    "bride_tel": "+81 090-1456-3792",
+    "calendar_title": "WEDDING DAY",
+    "calendar_date_full": "2026年 11月 28日 土曜日 | 午後 1時 40分",
+    "calendar_date_en": "Saturday, November 28, 2026 | PM 1:40",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "seconds": "SECONDS",
+    "countdown_footer": "{{groom}} ♥ {{bride}}の結婚式まで {{days}}日",
+    "account_title": "お祝いの気持ち",
+    "account_desc": "ご出席が叶わない方のために、銀行口座番号をご案内させていただきます。\n遠方より二人の門出を祝福していただければ幸いです。",
+    "groom_bank_name": "三菱UFJ 普通預金",
+    "groom_account_number": "練馬支店(459) 0417092",
+    "bride_bank_name": "Woori Bank",
+    "bride_account_number": "1002-123-456789"
 }

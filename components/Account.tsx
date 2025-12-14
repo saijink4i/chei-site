@@ -13,28 +13,27 @@ export default function Account({ lng }: { lng: string }) {
         {
             side: t('groom'),
             items: [
-                { name: t('groom_name'), bank: 'Shinhan Bank', number: '110-123-456789' },
-                { name: 'Father', bank: 'KB Kookmin', number: '123-45-678901' }
+                { name: t('groom_name'), bank: t('groom_bank_name'), number: t('groom_account_number') }
             ]
         },
         {
             side: t('bride'),
             items: [
-                { name: t('bride_name'), bank: 'Woori Bank', number: '1002-123-456789' },
-                { name: 'Mother', bank: 'Hana Bank', number: '1234-567-890123' }
+                { name: t('bride_name'), bank: t('bride_bank_name'), number: t('bride_account_number') }
             ]
         }
     ]
+
 
     return (
         <section className="py-20 px-6 bg-[#fdfbf7]">
             <div className="max-w-md mx-auto space-y-8">
                 <div className="text-center space-y-4">
                     <h2 className="text-2xl font-serif text-stone-800">
-                        {t('account_title', { defaultValue: 'Send a Gift' })}
+                        {t('account_title')}
                     </h2>
-                    <p className="text-stone-500 text-sm leading-relaxed">
-                        {t('account_desc', { defaultValue: 'Your warm heart will be delivered to us.' })}
+                    <p className="text-stone-500 text-sm leading-relaxed whitespace-pre-line">
+                        {t('account_desc')}
                     </p>
                 </div>
 
@@ -96,10 +95,16 @@ function AccountItem({ account }: { account: any }) {
     return (
         <div className="flex items-center justify-between bg-white p-3 rounded border border-stone-100">
             <div className="space-y-1">
-                <div className="text-sm font-medium text-stone-800">
+                <div
+                    className="text-sm font-medium text-stone-800"
+                    suppressHydrationWarning
+                >
                     {account.name}
                 </div>
-                <div className="text-xs text-stone-500">
+                <div
+                    className="text-xs text-stone-500"
+                    suppressHydrationWarning
+                >
                     {account.bank} {account.number}
                 </div>
             </div>

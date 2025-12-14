@@ -44,7 +44,7 @@ export default function Hero({ lng }: { lng: string }) {
                         {t('date')}
                     </p>
                     <p className="text-sm md:text-base font-light text-stone-200 tracking-wider">
-                        13:40 PM @ DMC타워웨딩
+                        {t('time_location')}
                     </p>
                     <p className="text-sm md:text-base font-light text-stone-200 tracking-wider">
                         {t('venue_address')}
