@@ -16,7 +16,7 @@ export default function Invitation({ lng }: { lng: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="max-w-md mx-auto space-y-12"
+                className="max-w-2xl mx-auto space-y-12"
             >
                 <div>
                     <span className="text-stone-500 tracking-[0.2em] text-xs uppercase block mb-4">
@@ -27,7 +27,7 @@ export default function Invitation({ lng }: { lng: string }) {
                     </h2>
                 </div>
 
-                <div className="leading-loose text-stone-600 font-serif whitespace-pre-line text-lg md:text-xl">
+                <div className="leading-loose text-stone-600 font-serif whitespace-pre-line text-base md:text-lg">
                     {poem}
                 </div>
 
