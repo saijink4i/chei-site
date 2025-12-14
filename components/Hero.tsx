@@ -29,9 +29,9 @@ export default function Hero({ lng }: { lng: string }) {
                 <div className="absolute inset-0 z-10 pointer-events-none opacity-90">
                     <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="w-full h-full">
                         {/* Cursive Heart Path - Asymmetrical and 'spilled' style */}
-                        {/* Layer 1: Main rough outline - Widened */}
+                        {/* Layer 1: Single continuous large sketchy heart */}
                         <motion.path
-                            d="M 50 198 C -30 110 -20 30 40 20 C 55 10 55 40 50 50 C 45 40 60 10 80 20 C 130 30 130 130 50 198"
+                            d="M 50 45 C 50 45 20 -10 -20 30 C -50 70 0 160 52 205 M 50 45 C 50 45 80 -10 120 30 C 150 70 100 160 48 205"
                             fill="none"
                             stroke="white"
                             strokeWidth="1.2"
@@ -42,29 +42,20 @@ export default function Hero({ lng }: { lng: string }) {
                             animate={{ pathLength: 1, opacity: 0.9 }}
                             transition={{ duration: 3, ease: "easeInOut" }}
                         />
-                        {/* Layer 2: Secondary sketch line - Widened */}
+
+                        {/* Layer 2: Offset sketch lines */}
+                        {/* 기존 경로: "M 52 48 C 52 48 25 -5 -15 35 C -45 75 5 155 55 208 M 48 48 C 48 48 75 -5 115 35 C 145 75 95 155 45 208" */}
                         <motion.path
-                            d="M 52 195 C -25 120 -15 35 42 22 C 58 12 52 45 50 55 C 48 45 65 12 85 22 C 125 45 125 135 52 195"
+                            d="M 52 48 C 52 48 25 -5 -15 35 C -45 75 5 155 55 208 M 48 48 C 48 48 75 -5 115 35 C 145 75 95 155 45 208"
                             fill="none"
                             stroke="white"
                             strokeWidth="0.8"
                             strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="drop-shadow-lg opacity-70"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 0.7 }}
                             transition={{ duration: 3.2, delay: 0.2, ease: "easeInOut" }}
-                        />
-                        {/* Layer 3: Extra scribbles - Widened */}
-                        <motion.path
-                            d="M 48 190 C -20 115 5 40 38 25 M 62 25 C 100 40 120 120 48 190"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="0.5"
-                            strokeLinecap="round"
-                            className="drop-shadow-lg opacity-60"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.6 }}
-                            transition={{ duration: 2.8, delay: 0.4, ease: "easeInOut" }}
                         />
                     </svg>
                 </div>
@@ -77,20 +68,19 @@ export default function Hero({ lng }: { lng: string }) {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="absolute bottom-16 inset-x-0 z-20 text-center text-white px-6 space-y-4"
+                    className="absolute bottom-48 inset-x-0 z-20 text-center text-white px-6 space-y-3"
                 >
-                    <p className="font-serif italic text-3xl md:text-4xl text-white/90 drop-shadow-md">
+                    <p className="font-serif text-lg md:text-xl text-white/90 drop-shadow-md">
                         We are getting married
                     </p>
 
-                    <div className="flex items-center justify-center gap-2 text-xs md:text-sm tracking-widest font-light uppercase opacity-90">
-                        {/* Names and Date in horizontal line as per image reference */}
-                        <span>{t('groom_name')}</span>
-                        <span className="opacity-50">|</span>
-                        <span>2026. 11. 28 SAT</span>
-                        <span className="opacity-50">|</span>
-                        <span>{t('bride_name')}</span>
-                    </div>
+                    <p className="font-serif text-2xl md:text-3xl font-medium text-white drop-shadow-md">
+                        {t('groom_name')} & {t('bride_name')}
+                    </p>
+
+                    <p className="font-serif text-lg md:text-xl text-white/90 drop-shadow-md tracking-widest">
+                        2026.11.28
+                    </p>
                 </motion.div>
             </div>
         </section>
