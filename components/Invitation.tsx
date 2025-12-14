@@ -27,7 +27,7 @@ export default function Invitation({ lng }: { lng: string }) {
                     </h2>
                 </div>
 
-                <div className="leading-loose text-stone-600 font-serif whitespace-pre-line text-base md:text-lg">
+                <div className="leading-loose text-stone-600 font-serif whitespace-pre-line text-sm md:text-lg">
                     {poem}
                 </div>
 
