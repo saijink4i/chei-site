@@ -29,16 +29,42 @@ export default function Hero({ lng }: { lng: string }) {
                 <div className="absolute inset-0 z-10 pointer-events-none opacity-90">
                     <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="w-full h-full">
                         {/* Cursive Heart Path - Asymmetrical and 'spilled' style */}
+                        {/* Layer 1: Main rough outline */}
                         <motion.path
-                            d="M 50 170 C 10 120 -10 60 25 35 C 50 15 60 50 60 50 C 60 50 70 10 95 30 C 115 50 85 120 50 170 Z"
+                            d="M 50 198 C -20 120 -10 40 40 20 C 55 10 55 40 50 50 C 45 40 60 10 80 20 C 120 50 110 130 50 198"
                             fill="none"
                             stroke="white"
                             strokeWidth="1.2"
                             strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="drop-shadow-lg opacity-90"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 2.5, ease: "easeInOut" }}
+                            transition={{ duration: 3, ease: "easeInOut" }}
+                        />
+                        {/* Layer 2: Secondary sketch line (slightly offset) */}
+                        <motion.path
+                            d="M 52 195 C -15 130 -5 45 42 22 C 58 12 52 45 50 55 C 48 45 65 12 85 22 C 115 55 105 135 52 195"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="0.8"
+                            strokeLinecap="round"
+                            className="drop-shadow-lg opacity-70"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 0.7 }}
+                            transition={{ duration: 3.2, delay: 0.2, ease: "easeInOut" }}
+                        />
+                        {/* Layer 3: Extra scribbles for hand-drawn feel */}
+                        <motion.path
+                            d="M 48 190 C -10 125 0 50 38 25 M 62 25 C 90 40 100 120 48 190"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="0.5"
+                            strokeLinecap="round"
+                            className="drop-shadow-lg opacity-60"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 0.6 }}
+                            transition={{ duration: 2.8, delay: 0.4, ease: "easeInOut" }}
                         />
                     </svg>
                 </div>
