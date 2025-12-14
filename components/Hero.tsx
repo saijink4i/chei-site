@@ -55,7 +55,7 @@ export default function Hero({ lng }: { lng: string }) {
                             className="drop-shadow-lg opacity-70"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 0.7 }}
-                            transition={{ duration: 3.2, delay: 0.2, ease: "easeInOut" }}
+                            transition={{ duration: 3, ease: "easeInOut" }}
                         />
                     </svg>
                 </div>
@@ -68,15 +68,22 @@ export default function Hero({ lng }: { lng: string }) {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="absolute bottom-48 inset-x-0 z-20 text-center text-white px-6 space-y-3"
+                    className="absolute bottom-75 inset-x-0 z-20 text-center text-white px-6 space-y-3"
                 >
                     <p className="font-serif text-lg md:text-xl text-white/90 drop-shadow-md">
                         We are getting married
                     </p>
 
-                    <p className="font-serif text-2xl md:text-3xl font-medium text-white drop-shadow-md">
-                        {t('groom_name')} & {t('bride_name')}
-                    </p>
+                    <div className="flex flex-col items-center gap-1">
+                        {lng === 'ja' && (
+                            <span className="font-serif text-sm md:text-base text-white/90 drop-shadow-md tracking-wider">
+                                {t('groom_name_yomi')} & {t('bride_name_yomi')}
+                            </span>
+                        )}
+                        <p className="font-serif text-2xl md:text-3xl font-medium text-white drop-shadow-md">
+                            {t('groom_name')} & {t('bride_name')}
+                        </p>
+                    </div>
 
                     <p className="font-serif text-lg md:text-xl text-white/90 drop-shadow-md tracking-widest">
                         2026.11.28
