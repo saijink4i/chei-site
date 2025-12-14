@@ -29,75 +29,42 @@ export default function Hero({ lng }: { lng: string }) {
                 <div className="absolute inset-0 z-10 pointer-events-none opacity-90">
                     <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="w-full h-full">
                         {/* Cursive Heart Path - Asymmetrical and 'spilled' style */}
-                        {/* Layer 1: Left Curve */}
+                        {/* Layer 1: Main rough outline - Widened */}
                         <motion.path
-                            d="M -10 100 C 10 140 40 180 52 205"
+                            d="M 50 198 C -30 110 -20 30 40 20 C 55 10 55 40 50 50 C 45 40 60 10 80 20 C 130 30 130 130 50 198"
                             fill="none"
                             stroke="white"
                             strokeWidth="1.2"
                             strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="drop-shadow-lg opacity-90"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            transition={{ duration: 3, ease: "easeInOut" }}
                         />
-                        {/* Layer 2: Right Curve */}
+                        {/* Layer 2: Secondary sketch line - Widened */}
                         <motion.path
-                            d="M 110 100 C 90 140 60 180 48 205"
+                            d="M 52 195 C -25 120 -15 35 42 22 C 58 12 52 45 50 55 C 48 45 65 12 85 22 C 125 45 125 135 52 195"
                             fill="none"
                             stroke="white"
-                            strokeWidth="1.2"
+                            strokeWidth="0.8"
                             strokeLinecap="round"
-                            className="drop-shadow-lg opacity-90"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        />
-                        {/* Layer 3: Top Left Curve (Dip) */}
-                        <motion.path
-                            d="M 20 -10 C 20 20 40 40 50 60"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="1.2"
-                            strokeLinecap="round"
-                            className="drop-shadow-lg opacity-90"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        />
-                        {/* Layer 4: Top Right Curve (Dip) */}
-                        <motion.path
-                            d="M 80 -10 C 80 20 60 40 50 60"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="1.2"
-                            strokeLinecap="round"
-                            className="drop-shadow-lg opacity-90"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        />
-
-                        {/* Extra sketch lines for the "multiple layers" feel */}
-                        <motion.path
-                            d="M -5 105 C 15 145 45 185 55 208"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="0.6"
-                            className="opacity-70"
+                            className="drop-shadow-lg opacity-70"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 0.7 }}
-                            transition={{ duration: 1.6, delay: 0.1 }}
+                            transition={{ duration: 3.2, delay: 0.2, ease: "easeInOut" }}
                         />
+                        {/* Layer 3: Extra scribbles - Widened */}
                         <motion.path
-                            d="M 105 105 C 85 145 55 185 45 208"
+                            d="M 48 190 C -20 115 5 40 38 25 M 62 25 C 100 40 120 120 48 190"
                             fill="none"
                             stroke="white"
-                            strokeWidth="0.6"
-                            className="opacity-70"
+                            strokeWidth="0.5"
+                            strokeLinecap="round"
+                            className="drop-shadow-lg opacity-60"
                             initial={{ pathLength: 0, opacity: 0 }}
-                            animate={{ pathLength: 1, opacity: 0.7 }}
-                            transition={{ duration: 1.6, delay: 0.1 }}
+                            animate={{ pathLength: 1, opacity: 0.6 }}
+                            transition={{ duration: 2.8, delay: 0.4, ease: "easeInOut" }}
                         />
                     </svg>
                 </div>
