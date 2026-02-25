@@ -8,12 +8,16 @@ export default function LanguageSwitcher({ lng }: { lng: string }) {
     const pathname = usePathname()
 
     const changeLanguage = (newLang: string) => {
+        // Set cookie so that next visits or hard reloads preserve language
+        document.cookie = `i18next=${newLang}; path=/; max-age=31536000`
+
         // Redirect to the new locale path
         if (!pathname) return
         const segments = pathname.split('/')
         segments[1] = newLang
         const newPath = segments.join('/')
         router.push(newPath)
+        router.refresh() // Ensure server components refresh with new locale
     }
 
     return (

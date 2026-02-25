@@ -23,7 +23,7 @@ i18next
     })
 
 export function useTranslation(lng: string, ns?: string, options?: { keyPrefix?: string }) {
-    const ret = useTranslationOrg(ns, options)
+    const ret = useTranslationOrg(ns, { ...options, lng })
     const { i18n } = ret
     if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
         i18n.changeLanguage(lng)
