@@ -3,46 +3,47 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { useTranslation } from '../app/i18n/client'
 import { Check, X, Mail, Phone } from 'lucide-react'
 
 // Schema
-const schema = z.object({
+const baseSchema = z.object({
     name: z.string().min(1, { message: 'Required' }),
     attendance: z.enum(['yes', 'no']),
     guests: z.number().min(0).max(10),
     message: z.string().optional(),
-    contactType: z.enum(['email', 'phone']),
     email: z.string().optional(),
     phone: z.string().optional(),
     countryCode: z.string(),
-}).superRefine((data, ctx) => {
-    if (data.contactType === 'email') {
-        if (!data.email || !z.string().email().safeParse(data.email).success) {
-            ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                path: ['email'],
-                message: 'Invalid email'
-            })
-        }
-    } else {
-        if (!data.phone || data.phone.length < 8) {
-            ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                path: ['phone'],
-                message: 'Invalid phone'
-            })
-        }
-    }
 })
 
-type FormData = z.infer<typeof schema>
+type FormData = z.infer<typeof baseSchema>
 
 export default function RsvpForm({ lng }: { lng: string }) {
     const { t } = useTranslation(lng)
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+
+    const schema = baseSchema.superRefine((data, ctx) => {
+        if (lng === 'ja') {
+            if (!data.email || !z.string().email().safeParse(data.email).success) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    path: ['email'],
+                    message: 'Invalid email'
+                })
+            }
+        } else {
+            if (!data.phone || data.phone.length < 8) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    path: ['phone'],
+                    message: 'Invalid phone'
+                })
+            }
+        }
+    })
 
     const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -50,7 +51,6 @@ export default function RsvpForm({ lng }: { lng: string }) {
             attendance: 'yes',
             guests: 0,
             message: '',
-            contactType: 'phone', // Default to phone as per user request context mainly implies mobile
             countryCode: lng === 'ja' ? '+81' : '+82',
             email: '',
             phone: ''
@@ -58,8 +58,6 @@ export default function RsvpForm({ lng }: { lng: string }) {
     })
 
     const attendance = watch('attendance')
-    const contactType = watch('contactType')
-    const countryCode = watch('countryCode')
 
     // Reset guests to 0 if not attending
     useEffect(() => {
@@ -90,12 +88,10 @@ export default function RsvpForm({ lng }: { lng: string }) {
                 attendance: 'yes',
                 guests: 0,
                 message: '',
-                contactType: 'phone',
                 countryCode: lng === 'ja' ? '+81' : '+82',
                 email: '',
                 phone: ''
             })
-            setTimeout(() => setStatus('idle'), 5000)
         } catch (e) {
             console.error(e)
             setStatus('error')
@@ -127,7 +123,10 @@ export default function RsvpForm({ lng }: { lng: string }) {
                     {/* Name */}
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-stone-600 block">
-                            {t('rsvp_name')}
+                            <span className="flex items-center gap-2">
+                                {t('rsvp_name')}
+                                <span className="text-red-500">*</span>
+                            </span>
                         </label>
                         <input
                             {...register('name')}
@@ -138,72 +137,61 @@ export default function RsvpForm({ lng }: { lng: string }) {
                     </div>
 
                     {/* Contact Info */}
-                    <div className="space-y-3">
-                        <label className="text-sm font-medium text-stone-600 block">
-                            {t('rsvp_contact_label')}
-                        </label>
-
-                        {/* Type Toggle */}
-                        <div className="flex gap-4 p-1 bg-stone-50 rounded-lg border border-stone-200 mb-2">
-                            <label className={`
-                                flex-1 flex items-center justify-center gap-2 py-2 rounded-md cursor-pointer transition-all text-sm font-medium
-                                ${contactType === 'phone' ? 'bg-white text-stone-800 shadow-sm border border-stone-100' : 'text-stone-400 hover:text-stone-600'}
-                            `}>
-                                <input
-                                    type="radio"
-                                    value="phone"
-                                    {...register('contactType')}
-                                    className="hidden"
-                                />
-                                <Phone size={14} />
-                                {t('rsvp_contact_type_phone')}
+                    <div className="space-y-4">
+                        {/* Phone */}
+                        <div>
+                            <label className="text-sm font-medium text-stone-600 block mb-2">
+                                <span className="flex items-center gap-2">
+                                    <Phone size={14} /> {t('rsvp_contact_type_phone')}
+                                    {lng === 'ko' && <span className="text-red-500">*</span>}
+                                </span>
                             </label>
-                            <label className={`
-                                flex-1 flex items-center justify-center gap-2 py-2 rounded-md cursor-pointer transition-all text-sm font-medium
-                                ${contactType === 'email' ? 'bg-white text-stone-800 shadow-sm border border-stone-100' : 'text-stone-400 hover:text-stone-600'}
-                            `}>
-                                <input
-                                    type="radio"
-                                    value="email"
-                                    {...register('contactType')}
-                                    className="hidden"
-                                />
-                                <Mail size={14} />
-                                {t('rsvp_contact_type_email')}
-                            </label>
+                            <div className="space-y-1">
+                                <div className="flex flex-col sm:flex-row gap-2">
+                                    <select
+                                        {...register('countryCode')}
+                                        className="px-3 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none cursor-pointer text-stone-600 text-sm font-medium"
+                                    >
+                                        <option value="+82">KR (+82)</option>
+                                        <option value="+81">JP (+81)</option>
+                                    </select>
+                                    <input
+                                        {...register('phone')}
+                                        type="tel"
+                                        className="flex-1 px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none transition-all"
+                                        placeholder={t('rsvp_phone_placeholder')}
+                                    />
+                                </div>
+                                {errors.phone && <p className="text-red-500 text-xs">{t('rsvp_error_phone')}</p>}
+                            </div>
                         </div>
 
-                        {/* Input Fields */}
-                        <div className="relative">
-                            {contactType === 'email' ? (
-                                <div>
-                                    <input
-                                        {...register('email')}
-                                        className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none transition-all"
-                                        placeholder={t('rsvp_email_placeholder')}
-                                    />
-                                    {errors.email && <p className="text-red-500 text-xs mt-1">{t('rsvp_error_email')}</p>}
-                                </div>
-                            ) : (
-                                <div className="space-y-1">
-                                    <div className="flex flex-col sm:flex-row gap-2">
-                                        <select
-                                            {...register('countryCode')}
-                                            className="px-3 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none cursor-pointer text-stone-600 text-sm font-medium"
-                                        >
-                                            <option value="+82">KR (+82)</option>
-                                            <option value="+81">JP (+81)</option>
-                                        </select>
-                                        <input
-                                            {...register('phone')}
-                                            type="tel"
-                                            className="flex-1 px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none transition-all"
-                                            placeholder={t('rsvp_phone_placeholder')}
-                                        />
-                                    </div>
-                                    {errors.phone && <p className="text-red-500 text-xs">{t('rsvp_error_phone')}</p>}
-                                </div>
-                            )}
+                        {/* Email */}
+                        <div>
+                            <label className="text-sm font-medium text-stone-600 block mb-1">
+                                <span className="flex items-center gap-2">
+                                    <Mail size={14} /> {t('rsvp_contact_type_email')}
+                                    {lng === 'ja' && <span className="text-red-500">*</span>}
+                                </span>
+                            </label>
+                            <div>
+                                <input
+                                    {...register('email')}
+                                    className={`w-full px-4 py-3 bg-stone-50 border rounded-lg focus:ring-2 focus:ring-[#8B7355]/20 focus:border-[#8B7355] outline-none transition-all ${lng === 'ja' && errors.email ? 'border-red-300' : 'border-stone-200'}`}
+                                    placeholder={t('rsvp_email_placeholder')}
+                                />
+                                {errors.email && <p className="text-red-500 text-xs mt-1">{t('rsvp_error_email')}</p>}
+                            </div>
+                            <div className="mt-2">
+                                <p className={`text-xs ${lng === 'ja' && errors.email ? 'text-red-500 font-medium' : 'text-stone-500'} transition-colors`}>
+                                    {t('rsvp_email_desc')}
+                                </p>
+                                {lng === 'ja' && errors.email && (
+                                    <p className="text-red-500 text-xs mt-1">
+                                        {t('rsvp_email_error_detail')}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -290,16 +278,7 @@ export default function RsvpForm({ lng }: { lng: string }) {
                         {status === 'submitting' ? t('rsvp_btn_submitting') : t('rsvp_btn_send')}
                     </button>
 
-                    {/* Status Messages */}
-                    {status === 'success' && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="p-4 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium"
-                        >
-                            {t('rsvp_success')}
-                        </motion.div>
-                    )}
+                    {/* Error Message */}
                     {status === 'error' && (
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -311,6 +290,41 @@ export default function RsvpForm({ lng }: { lng: string }) {
                     )}
                 </motion.form>
             </div>
+
+            {/* Success Modal Popup */}
+            <AnimatePresence>
+                {status === 'success' && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 10 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 10 }}
+                            className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-xl border border-stone-100/50"
+                        >
+                            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+                                <Check size={32} strokeWidth={2.5} />
+                            </div>
+                            <h3 className="text-xl font-serif font-medium text-stone-800 mb-2">
+                                Thank you
+                            </h3>
+                            <p className="text-stone-600 mb-8 whitespace-pre-line text-sm leading-relaxed">
+                                {t('rsvp_success')}
+                            </p>
+                            <button
+                                onClick={() => setStatus('idle')}
+                                className="w-full py-3.5 bg-[#292524] text-white font-medium rounded-xl hover:bg-stone-800 active:scale-[0.98] transition-all shadow-md"
+                            >
+                                {t('rsvp_success_btn')}
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     )
 }

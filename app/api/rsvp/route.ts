@@ -4,11 +4,10 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
     try {
         const body = await request.json()
-        const { name, attendance, guests, message, contactType, email, phone, countryCode } = body
+        const { name, attendance, guests, message, email, phone, countryCode } = body
 
-        const contact = contactType === 'email'
-            ? `'${email}`
-            : `'${countryCode} ${phone}`
+        const formattedPhone = `'${countryCode} ${phone}`
+        const formattedEmail = email
 
         const sheets = await getGoogleSheetsClient()
         const spreadsheetId = process.env.GOOGLE_SHEET_ID
@@ -34,11 +33,11 @@ export async function POST(request: Request) {
 
         await sheets.spreadsheets.values.append({
             spreadsheetId,
-            range: 'Sheet1!A:G',
+            range: 'Sheet1!A:H',
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [
-                    [date, time, name, contact, attendance, guests, message]
+                    [date, time, name, formattedPhone, formattedEmail, attendance, guests, message]
                 ],
             },
         })
