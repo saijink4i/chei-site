@@ -10,7 +10,7 @@ export default function Invitation({ lng }: { lng: string }) {
     const poem = t('invitation_poem')
 
     return (
-        <section className="py-24 px-6 bg-[#fdfbf7] flex flex-col items-center justify-center text-center">
+        <section className="py-12 px-6 bg-[#fdfbf7] flex flex-col items-center justify-center text-center">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

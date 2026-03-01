@@ -22,7 +22,7 @@ export default function Contact({ groom, bride }: ContactProps) {
     const contactInfo = [groom, bride]
 
     return (
-        <section className="py-24 px-6 bg-white">
+        <section className="py-12 px-6 bg-white">
             <div className="max-w-4xl mx-auto space-y-24">
                 <div className="space-y-24">
                     {contactInfo.map((person, index) => {

@@ -31,7 +31,7 @@ export default function Gallery({ lng }: { lng: string }) {
     }
 
     return (
-        <section className="py-20 bg-[#fdfbf7] select-none">
+        <section className="py-12 bg-[#fdfbf7] select-none">
             <div className="text-center mb-10 space-y-4">
                 <span className="text-stone-500 tracking-[0.2em] text-xs uppercase">
                     Gallery
@@ -43,7 +43,7 @@ export default function Gallery({ lng }: { lng: string }) {
 
             <div className="max-w-4xl mx-auto px-4 flex flex-col items-center gap-8">
                 {/* Main Image Viewer */}
-                <div className="relative w-full max-w-md aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-2xl overflow-hidden shadow-lg group">
+                <div className="relative w-full max-w-md aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-2xl overflow-hidden shadow-lg group touch-pan-y">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={index}
@@ -57,8 +57,9 @@ export default function Gallery({ lng }: { lng: string }) {
                                 src={images[index]}
                                 alt={`Gallery image ${index + 1}`}
                                 fill
-                                className="object-contain"
+                                className="object-contain pointer-events-none"
                                 priority
+                                draggable={false}
                             />
                         </motion.div>
                     </AnimatePresence>
@@ -101,7 +102,8 @@ export default function Gallery({ lng }: { lng: string }) {
                                     src={src}
                                     alt={`Thumbnail ${idx + 1}`}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover pointer-events-none"
+                                    draggable={false}
                                 />
                             </button>
                         ))}

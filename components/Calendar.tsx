@@ -37,7 +37,7 @@ export default function Calendar({ lng }: { lng: string }) {
     }, [])
 
     return (
-        <section className="py-24 px-6 bg-[#fbfaf9] flex flex-col items-center">
+        <section className="py-12 px-6 bg-[#fbfaf9] flex flex-col items-center">
             {/* Header */}
             <div className="space-y-6 text-center mb-12">
                 <h2 className="text-4xl font-serif text-stone-800 tracking-wide">

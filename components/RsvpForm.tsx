@@ -99,7 +99,7 @@ export default function RsvpForm({ lng }: { lng: string }) {
     }
 
     return (
-        <section className="py-24 px-6 bg-[#fdfbf7] flex justify-center">
+        <section className="py-12 px-6 bg-[#fdfbf7] flex justify-center">
             <div className="w-full max-w-lg">
                 <div className="text-center mb-12 space-y-4">
                     <span className="text-stone-500 tracking-[0.2em] text-xs uppercase">

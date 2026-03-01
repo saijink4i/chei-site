@@ -19,8 +19,9 @@ export default function Hero({ lng }: { lng: string }) {
                         src="/images/hero-bg.png"
                         alt="Wedding Couple"
                         fill
-                        className="object-cover"
+                        className="object-cover pointer-events-none"
                         priority
+                        draggable={false}
                     />
                     <div className="absolute inset-0 bg-black/20" />
                 </div>
@@ -68,7 +69,7 @@ export default function Hero({ lng }: { lng: string }) {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="absolute bottom-75 inset-x-0 z-20 text-center text-white px-6 space-y-3"
+                    className="absolute bottom-60 md:bottom-64 inset-x-0 z-20 text-center text-white px-6 space-y-3"
                 >
                     <p className="font-serif text-lg md:text-xl text-white/90 drop-shadow-md">
                         We are getting married

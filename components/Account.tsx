@@ -23,7 +23,7 @@ export default function Account({ lng }: { lng: string }) {
 
 
     return (
-        <section className="py-20 px-6 bg-[#fdfbf7]">
+        <section className="py-12 px-6 bg-[#fdfbf7]">
             <div className="max-w-2xl mx-auto space-y-8">
                 <div className="text-center space-y-4">
                     <h2 className="text-2xl font-serif text-stone-800">

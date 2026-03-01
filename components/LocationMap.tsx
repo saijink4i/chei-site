@@ -14,7 +14,7 @@ export default function LocationMap({ lng }: { lng: string }) {
     }
 
     return (
-        <section className="py-20 px-6 bg-white">
+        <section className="py-12 px-6 bg-white">
             <div className="max-w-3xl mx-auto space-y-12">
                 <div className="text-center space-y-2">
                     <span className="text-stone-500 tracking-[0.2em] text-xs uppercase">
