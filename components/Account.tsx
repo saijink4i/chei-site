@@ -8,21 +8,18 @@ import { ChevronDown, Copy, Check } from 'lucide-react'
 export default function Account({ lng }: { lng: string }) {
     const { t } = useTranslation(lng)
 
-    // Account Data Structure
     const accounts = [
         {
-            side: t('groom'),
+            side: t('account'),
             items: [
                 { name: t('groom_name'), bank: t('groom_bank_name'), number: t('groom_account_number') }
             ]
-        },
-        {
-            side: t('bride'),
-            items: [
-                { name: t('bride_name'), bank: t('bride_bank_name'), number: t('bride_account_number') }
-            ]
         }
     ]
+
+    if (lng === 'ja') {
+        return null;
+    }
 
 
     return (
