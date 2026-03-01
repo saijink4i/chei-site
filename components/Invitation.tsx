@@ -22,7 +22,7 @@ export default function Invitation({ lng }: { lng: string }) {
                     <span className="text-stone-500 tracking-[0.2em] text-xs uppercase block mb-4">
                         Invitation
                     </span>
-                    <h2 className="text-3xl font-serif text-stone-800 mb-8">
+                    <h2 className="text-3xl font-serif text-stone-800 mb-8 whitespace-pre-line">
                         {t('welcome')}
                     </h2>
                 </div>
