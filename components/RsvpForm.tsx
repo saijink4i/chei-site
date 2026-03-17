@@ -81,7 +81,11 @@ export default function RsvpForm({ lng }: { lng: string }) {
                 body: JSON.stringify(submitData),
             })
 
-            if (!response.ok) throw new Error('Failed to submit')
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Failed to submit' }))
+                console.error('Server Error:', errorData)
+                throw new Error(errorData.error || 'Failed to submit')
+            }
 
             setStatus('success')
             reset({
