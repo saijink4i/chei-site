@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wedding Invitation Project
+このプロジェクトは、私たちだけのカスタムウェディング招待状を作成するために開発されたウェブアプリケーションです。
+ポートフォリオとしても活用できるよう、プロジェクトの背景や技術的な工夫点を以下にまとめました。
 
-## Getting Started
+## 1. 動機 (Motivation)
+既存のテンプレート化されたモバイル招待状を使用する代わりに、私たちの物語と好みを込めたカスタムデザインを実現するため、スクラッチでの開発を決心しました。
+外部サービスを利用する費用を削減しつつ、最新のウェブ技術を活用することで、単なる情報伝達にとどまらず、閲覧するゲストに特別な経験を提供するプロフェッショナルなデジタル・インビテーションを構築することを目指しました。
 
-First, run the development server:
+## 2. 技術スタック (Tech Stack)
+直感的なUI開発と高いパフォーマンスを実現するため、以下のモダンな技術を選定・活用しています。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework**: Next.js 16 (App Router), React 19
+- **Language**: TypeScript
+- **Styling & Animation**: Tailwind CSS v4, Framer Motion
+- **Maps**: Google Maps API (`@react-google-maps/api`)
+- **Internationalization (i18n)**: i18next, react-i18next (韓国語・日本語の多言語対応)
+- **Form & Validation**: React Hook Form, Zod
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 3. 工夫した点・課題 (Challenges & Solutions)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **日韓の文化の違いに合わせたカスタムレンダリング (Cultural Customization)**:
+  言語の選択および切り替えと、韓国と日本の結婚式文化の違い（ご祝儀口座の案内有無、出欠の返答方法など）を分析し、ユーザーが選択した言語に応じてUIと提供する情報が動的に切り替わるよう、i18n環境とそれに連動するコンポーネントロジックを設計しました。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **レスポンシブ最適化 (Responsive Optimization)**:
+  多様なデバイス（スマートフォン、タブレット、PC）で一貫して美しいUI/UXを提供するため、モバイルファースト（Mobile-First）プレースメントを適用し、画面サイズに合わせた細かなレスポンシブデザインを実装しました。
 
-## Learn More
+- **ローディング速度の最適化 (Loading Performance)**:
+  高解像度のウェディング写真などのアセットがレンダリングを遅延させないよう、Next.jsの画像最適化を活用しました。初期ロード時のリソースを最小限に抑えることで、スムーズで快適なUXを提供できるよう心掛けました。
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 4. 結果 (Results)
+サイトを受け取ったゲストの方々からは「工夫したね！」「使いやすい！」など、非常に肯定的なフィードバックをいただくことができました。
+また、自分自身も、ゲストの出欠回答データをGoogleスプレッドシートと連動させる仕組みを構築したことで、参加者リストをリアルタイムかつ一目で把握できるようになり、結婚式準備の効率を大幅に向上させることができました。
