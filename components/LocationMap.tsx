@@ -6,11 +6,12 @@ import { MapPin, Bus, Train, Car } from 'lucide-react'
 export default function LocationMap({ lng }: { lng: string }) {
     const { t } = useTranslation(lng)
     // Keyless embed URL
-    const mapEmbedUrl = `https://maps.google.com/maps?q=DMC+Tower+Wedding&t=&z=15&ie=UTF8&iwloc=&output=embed`
+    const searchQuery = encodeURIComponent('서울 DMC타워웨딩');
+    const mapEmbedUrl = `https://maps.google.com/maps?q=${searchQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`
 
     const handleOpenMap = () => {
         // DMC Tower Wedding Address
-        window.open('https://www.google.com/maps/search/?api=1&query=DMC+Tower+Wedding', '_blank')
+        window.open(`https://www.google.com/maps/search/?api=1&query=${searchQuery}`, '_blank')
     }
 
     return (
